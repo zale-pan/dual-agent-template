@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "P1-T01",
+  "title": "Bounded feature title",
+  "status": "draft",
+  "owner_role": "implementation_agent",
+  "runtime_assignment": "IMPLEMENTATION_RUNTIME",
+  "task_doc": "tasks/active/P1-T01.en.md",
+  "consultation_ref": "tasks/consultations/P1-T01.zh-CN.md",
+  "consultation_status": "not_started",
+  "completion_report_path": "task_interactions/P1-T01/round-001/completion-report.yaml",
+  "round_manifest_path": "task_interactions/P1-T01/round-001/package/round-manifest.json",
+  "governed_input_paths": [
+    "IMPLEMENTATION_AGENT_PROMPT.en.md",
+    "AGENTS.md",
+    "COLLABORATION_POLICY.json",
+    "PROJECT_GOALS.json",
+    "DEVELOPMENT_STATUS.json",
+    "tasks/CURRENT_TASK.md",
+    "tasks/consultations/P1-T01.zh-CN.md",
+    "tasks/active/P1-T01.en.md",
+    "tasks/active/P1-T01.task.json",
+    "task_interactions/P1-T01/round-001/instruction.md"
+  ],
+  "goal_refs": [
+    "G-FEATURE-001",
+    "G-GOV-001"
+  ],
+  "acceptance_refs": [
+    "G-FEATURE-001-AC01",
+    "G-FEATURE-001-AC02",
+    "G-GOV-001-AC01",
+    "G-GOV-001-AC02"
+  ],
+  "allowed_write_paths": [
+    "src/package/feature.py",
+    "src/package/__init__.py",
+    "tests/test_feature.py",
+    "task_interactions/P1-T01/round-001/completion-report.yaml"
+  ],
+  "required_commands": [
+    "SCOPE_CHECK_COMMAND",
+    "PROJECT_CHECK_COMMAND",
+    "TARGETED_TEST_COMMAND",
+    "FULL_TEST_COMMAND",
+    "LINT_COMMAND",
+    "BUILD_COMMAND"
+  ],
+  "forbidden_expansions": [
+    "later-phase behavior",
+    "protected data or production systems",
+    "editing task, ledger, handoff, review, or verification files"
+  ],
+  "round_id": "round-001"
+}

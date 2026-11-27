@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.1.0",
+  "document_type": "project_goals",
+  "project": "PROJECT_NAME",
+  "evidence_rule": "configured != implemented != exercised != verified",
+  "mission": "Replace with one bounded, user-centered project mission.",
+  "human_review_views": [
+    "docs/GOVERNANCE_REVIEW.zh-CN.md",
+    "TRACEABILITY_MATRIX.md"
+  ],
+  "protected_surfaces": [
+    "credentials_and_secrets",
+    "production_permissions",
+    "raw_input_evidence",
+    "fixed_evaluator",
+    "upstream_reference"
+  ],
+  "goals": [
+    {
+      "id": "G-FEATURE-001",
+      "name_zh": "示例目标",
+      "name_en": "Example goal",
+      "status": "planned",
+      "acceptance_criteria": [
+        {
+          "id": "G-FEATURE-001-AC01",
+          "description": "Produce one deterministic and schema-valid primary output from an approved input.",
+          "status": "planned",
+          "evidence": []
+        },
+        {
+          "id": "G-FEATURE-001-AC02",
+          "description": "Reject malformed or unsupported input with a stable actionable error without sensitive-value leakage.",
+          "status": "planned",
+          "evidence": []
+        }
+      ],
+      "planned_components": [
+        "ExampleComponent"
+      ],
+      "implementation": {
+        "status": "planned",
+        "components": [],
+        "evidence": [],
+        "limitations": []
+      },
+      "exercise": {
+        "status": "planned",
+        "paths": [],
+        "evidence": []
+      },
+      "verification": {
+        "status": "planned",
+        "protocol": "Independent task-steward verification",
+        "evidence": []
+      }
+    },
+    {
+      "id": "G-GOV-001",
+      "name_zh": "治理和边界",
+      "name_en": "Governance and boundaries",
+      "status": "planned",
+      "acceptance_criteria": [
+        {
+          "id": "G-GOV-001-AC01",
+          "description": "Every accepted task has immutable round-input provenance, a traceable instruction and implementation claim, independent verification, and an append-only hash-chained status-transition history.",
+          "status": "planned",
+          "evidence": []
+        },
+        {
+          "id": "G-GOV-001-AC02",
+          "description": "Implementation writes are restricted to exact task-authorized paths and protected surfaces remain unchanged.",
+          "status": "planned",
+          "evidence": []
+        }
+      ],
+      "planned_components": [
+        "ProjectCheck",
+        "ScopeCheck",
+        "RoundProvenanceCheck",
+        "GovernanceEventChainCheck",
+        "ReviewViewCheck"
+      ],
+      "implementation": {
+        "status": "planned",
+        "components": [],
+        "evidence": [],
+        "limitations": []
+      },
+      "exercise": {
+        "status": "planned",
+        "paths": [],
+        "evidence": []
+      },
+      "verification": {
+        "status": "planned",
+        "protocol": "Positive and negative governance-control drills",
+        "evidence": []
+      }
+    }
+  ],
+  "non_goals": [
+    "Do not modify protected production systems during bootstrap.",
+    "Do not claim broader compatibility than the versioned fixtures or integrations actually exercised."
+  ]
+}

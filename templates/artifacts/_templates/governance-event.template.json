@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "canonicalization": "rfc8785-jcs",
+  "hash_algorithm": "sha256",
+  "event_id": "EVENT_ID",
+  "sequence": 1,
+  "event_type": "EVENT_TYPE",
+  "occurred_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "actor_role": "task_steward",
+  "actor_runtime": "STEWARD_RUNTIME",
+  "task_id": "TASK_ID_OR_NULL",
+  "state_domain": "task_execution_or_consultation_or_policy",
+  "previous_state": "PREVIOUS_STATE_OR_NULL",
+  "new_state": "NEW_STATE_OR_NULL",
+  "artifact_hashes": {
+    "REPOSITORY_RELATIVE_PATH": "SHA256_HEX"
+  },
+  "reason": "CONCISE_REASON",
+  "limitations": [],
+  "supersedes_event_id": null,
+  "previous_event_hash": null,
+  "event_hash": "SHA256_HEX"
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "0.1.0",
+  "document_type": "collaboration_policy",
+  "project": "PROJECT_NAME",
+  "policy_status": "configured",
+  "roles": {
+    "task_steward": {
+      "runtime": "STEWARD_RUNTIME",
+      "write_scopes": [
+        "AGENTS.md",
+        ".dual-agent/COLLABORATION_POLICY.json",
+        ".dual-agent/IMPLEMENTATION_AGENT_PROMPT.en.md",
+        ".dual-agent/PROJECT_BRIEF.md",
+        ".dual-agent/PROJECT_GOALS.json",
+        ".dual-agent/COMPONENT_REGISTRY.json",
+        ".dual-agent/review-views.json",
+        ".dual-agent/REVIEW_VIEW_GENERATION.md",
+        ".dual-agent/DEVELOPMENT_ROADMAP.md",
+        ".dual-agent/DEVELOPMENT_ROADMAP.en.md",
+        ".dual-agent/DEVELOPMENT_STATUS.json",
+        ".dual-agent/TASK_CATALOG.md",
+        ".dual-agent/TRACEABILITY_MATRIX.md",
+        ".dual-agent/ARCHITECTURE_BOUNDARIES.md",
+        ".dual-agent/PLANNING_REVIEW_CHECKLIST.zh-CN.md",
+        ".dual-agent/STATUS_TRANSITIONS.md",
+        ".dual-agent/ROUND_PROVENANCE.md",
+        ".dual-agent/EVENT_LOG_PROTOCOL.md",
+        ".dual-agent/tasks/**",
+        ".dual-agent/task_interactions/README.md",
+        ".dual-agent/task_interactions/**/instruction.md",
+        ".dual-agent/task_interactions/**/round-manifest.json",
+        ".dual-agent/task_interactions/**/package/**",
+        ".dual-agent/task_interactions/**/verification.md",
+        ".dual-agent/task_interactions/**/review.zh-CN.md",
+        ".dual-agent/task_interactions/**/completion-report-status.md",
+        ".dual-agent/docs/**",
+        ".dual-agent/artifacts/handoffs/**",
+        ".dual-agent/artifacts/events/**",
+        ".dual-agent/artifacts/verification/**"
+      ],
+      "read_only_scopes": [
+        "src/**",
+        "tests/**",
+        "configs/runtime/**",
+        "configs/environments/**",
+        "fixtures/**",
+        "pyproject.toml"
+      ]
+    },
+    "implementation_agent": {
+      "runtime": "IMPLEMENTATION_RUNTIME",
+      "default_write_scopes": [],
+      "task_declared_write_scopes_required": true,
+      "completion_report_exception": "Only the exact current completion_report_path may be writable when it is also listed in the approved manifest.",
+      "forbidden_write_scopes": [
+        "AGENTS.md",
+        ".dual-agent/COLLABORATION_POLICY.json",
+        ".dual-agent/IMPLEMENTATION_AGENT_PROMPT.en.md",
+        ".dual-agent/PROJECT_BRIEF.md",
+        ".dual-agent/PROJECT_GOALS.json",
+        ".dual-agent/COMPONENT_REGISTRY.json",
+        ".dual-agent/review-views.json",
+        ".dual-agent/REVIEW_VIEW_GENERATION.md",
+        ".dual-agent/DEVELOPMENT_ROADMAP.md",
+        ".dual-agent/DEVELOPMENT_ROADMAP.en.md",
+        ".dual-agent/DEVELOPMENT_STATUS.json",
+        ".dual-agent/TASK_CATALOG.md",
+        ".dual-agent/TRACEABILITY_MATRIX.md",
+        ".dual-agent/ARCHITECTURE_BOUNDARIES.md",
+        ".dual-agent/PLANNING_REVIEW_CHECKLIST.zh-CN.md",
+        ".dual-agent/STATUS_TRANSITIONS.md",
+        ".dual-agent/ROUND_PROVENANCE.md",
+        ".dual-agent/EVENT_LOG_PROTOCOL.md",
+        ".dual-agent/tasks/**",
+        ".dual-agent/task_interactions/README.md",
+        ".dual-agent/task_interactions/**/instruction.md",
+        ".dual-agent/task_interactions/**/round-manifest.json",
+        ".dual-agent/task_interactions/**/package/**",
+        ".dual-agent/task_interactions/**/verification.md",
+        ".dual-agent/task_interactions/**/review.zh-CN.md",
+        ".dual-agent/docs/**",
+        ".dual-agent/artifacts/**",
+        "PROTECTED_REFERENCE_PATH/**"
+      ]
+    }
+  },
+  "protected_surfaces": [
+    "credentials and secrets",
+    "permissions and production endpoints",
+    "raw input evidence",
+    "fixed evaluators and baselines",
+    "historical audit records",
+    "upstream reference code"
+  ],
+  "task_consultation": {
+    "required_before_approval": true,
+    "record_pattern": "Current round contract or an explicitly bound consultation record",
+    "decision_owner": "user",
+    "record_owner": "task_steward",
+    "required_agreed_status": "agreed"
+  },
+  "verification_owner": "task_steward",
+  "status_update_owner": "task_steward",
+  "limitations": [
+    "Repository path checks do not provide operating-system isolation.",
+    "Repository write scopes cannot technically enforce append-only writes; event-chain verification detects mutation after the fact.",
+    "A repository prompt digest proves the configured source bytes, not provider-side prompt delivery when the runtime cannot export them.",
+    "Use restricted tools, a separate identity, container, or worktree when stronger isolation is required."
+  ],
+  "verification_execution": {
+    "status": "manual",
+    "document_path": ".dual-agent/docs/ACCEPTANCE_EXECUTION_RULES.zh-CN.md",
+    "plan_required": true,
+    "mode": "independent_affected_checks",
+    "continue_on_ordinary_product_failure": true,
+    "stop_on_confirmed_required_failure": false,
+    "stop_exceptions": [
+      "safety_or_untrusted_provenance",
+      "impossible_dependency_for_affected_check"
+    ],
+    "full_suite": "Run when required by the frozen contract or agreed impact analysis; once per unchanged fingerprint.",
+    "installed_distribution": "Build/install current changed packaged sources;do not reuse old artifacts blindly.",
+    "automated_enforcement": "not_implemented;copied configuration is not project activation or verification."
+  },
+  "data_retention": {
+    "policy": ".dual-agent/docs/STEWARD_STORAGE_VALIDATION.zh-CN.md",
+    "closed_round_record": "one_markdown_summary",
+    "keep_formal_test_source": true,
+    "delete_unpinned_runtime_outputs_after_independent_closure": true,
+    "retirement_checker_status": "not_implemented",
+    "automatic_cleanup_status": "manual approval; apply_cleanup executes approved inventory rows",
+    "active_round_protected": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.1.0",
+  "evidence_id": "EVIDENCE_ID",
+  "phase_id": "PHASE_ID",
+  "task_id": "TASK_ID",
+  "accepted_round": "ROUND_NUMBER",
+  "verified_at": "YYYY-MM-DD",
+  "verification_owner": "task_steward",
+  "review_mode": "read-only implementation review",
+  "round_provenance": {
+    "manifest_path": "ROUND_MANIFEST_PATH",
+    "manifest_sha256": "SHA256_HEX",
+    "all_input_hashes_match": true
+  },
+  "governance_event_refs": [
+    "EVENT_ID"
+  ],
+  "checks": [
+    {
+      "command": "EXACT_COMMAND",
+      "result": "passed",
+      "summary": "Observed result, not agent claim."
+    }
+  ],
+  "file_hashes": {
+    "VERIFIED_FILE_PATH": "SHA256_HEX"
+  },
+  "verified_behaviors": [
+    "One concrete verified behavior."
+  ],
+  "limitations": [
+    "One explicit limitation."
+  ],
+  "decision": "verified",
+  "template_only": true,
+  "acceptance_execution": {
+    "rule_path": ".dual-agent/docs/ACCEPTANCE_EXECUTION_RULES.zh-CN.md",
+    "plan_path": "EXACT_PLAN_PATH",
+    "mode": "full_independent_collection",
+    "ordinary_failures_stop_independent_checks": false,
+    "observed_full_suite_runs": "OBSERVED_COUNT",
+    "all_confirmed_findings": [],
+    "unexecuted_with_safety_provenance_dependency_reason": [],
+    "runner_reuse_and_exact_adaptations": [],
+    "observed_change_counts": {"implementation_test_document_changes": null, "report_changes": null, "steward_evidence_changes": null, "total_changes": null, "inventory_evidence": "EXACT_PATH_AND_SHA"},
+    "interactive_process_evidence": []
+  },
+  "cost_accounting": {
+    "wall_started_at": null,
+    "wall_finished_at": null,
+    "wall_elapsed_seconds": null,
+    "stage_intervals_and_evidence": [],
+    "tool_execution_seconds": null,
+    "steward_adaptation_and_documentation_seconds": null,
+    "interactive_idle_seconds": null,
+    "audit_rework_seconds": null,
+    "measurement_basis": "Mark measured/estimated intervals;unknown/null if unmeasured. Timestamp gaps do not prove exact thinking time.",
+    "overlap_accounting": "Identify parallel stages;do not sum overlapping durations as total wall time."
+  }
+}

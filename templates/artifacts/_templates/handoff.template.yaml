@@ -1,0 +1,10 @@
+task_id: TASK_ID
+implementation_agent: IMPLEMENTATION_RUNTIME
+reported_at: YYYY-MM-DD
+submission_status: implementation_submitted
+accepted_round: ROUND_NUMBER
+source_report: SOURCE_REPORT_PATH
+report_sha256: SHA256_HEX
+round_manifest: ROUND_MANIFEST_PATH
+round_manifest_sha256: SHA256_HEX
+steward_interpretation: The completion report is an agent claim; independent evidence determines verified status.

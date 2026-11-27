@@ -1,0 +1,1 @@
+Read .dual-agent/tasks/CURRENT_TASK.md and AGENTS.md, then follow the current approved and dispatched contract as the Implementation Agent. For business work also require project_startup.status = ready in .dual-agent/DEVELOPMENT_STATUS.json. If any binding is missing, stop and report it.

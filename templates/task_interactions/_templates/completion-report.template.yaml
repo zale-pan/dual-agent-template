@@ -1,0 +1,17 @@
+task_id: TASK_ID
+round_id: round-NNN
+round_manifest_path: ROUND_MANIFEST_PATH
+round_manifest_sha256: SHA256_HEX
+implementation_status: submitted
+changed_files:
+  - path: AUTHORIZED_CHANGED_FILE
+    purpose: CONCISE_PURPOSE
+requirements_completed:
+  - REQUIREMENT_ID
+commands_run:
+  - command: EXACT_COMMAND
+    exit_code: EXIT_CODE
+    summary: CONCISE_OBSERVED_RESULT
+known_limitations: []
+scope_exceptions: []
+steward_owned_files_modified: []

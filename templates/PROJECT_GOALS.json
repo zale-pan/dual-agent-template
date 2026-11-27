@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "document_type": "project_goals",
+  "project": "PROJECT_NAME",
+  "evidence_rule": "configured != implemented != exercised != verified",
+  "mission": "Replace with one bounded, user-centered project mission.",
+  "human_review_views": [
+    ".dual-agent/docs/GOVERNANCE_REVIEW.zh-CN.md",
+    ".dual-agent/TRACEABILITY_MATRIX.md"
+  ],
+  "protected_surfaces": [
+    "credentials_and_secrets",
+    "production_permissions",
+    "raw_input_evidence",
+    "fixed_evaluator",
+    "upstream_reference"
+  ],
+  "goals": [],
+  "non_goals": [
+    "Do not modify protected production systems during bootstrap.",
+    "Do not claim broader compatibility than the versioned fixtures or integrations actually exercised."
+  ]
+}

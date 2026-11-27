@@ -1,0 +1,2 @@
+# Agreement and dispatch
+Record the actual user decision against a task, round, implementation identity, input fingerprint and exact scope. Bind the dispatched copy and verify it at the handoff location. Drafts, silence, example manifests and old approvals grant no writes. If the recipient cannot confirm receipt, distinguish shared-workspace delivery from provider receipt. A material scope change requires explicit approval. Keep the working record through its last consumer; retain the final decision in the round summary.

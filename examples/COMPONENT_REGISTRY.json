@@ -1,0 +1,51 @@
+{
+  "schema_version": "2.0.0",
+  "document_type": "component_registry_template",
+  "project": "PROJECT_NAME",
+  "default_mutation_mode": "forbidden",
+  "human_review_views": ["docs/GOVERNANCE_REVIEW.zh-CN.md"],
+  "components": [
+    {
+      "component_id": "governance_controls",
+      "type": "governance_tooling",
+      "owner": "implementation_agent",
+      "availability": "planned",
+      "risk_level": "high",
+      "path_scope": {
+        "include": ["PROJECT_CHECK_IMPLEMENTATION_PATH", "SCOPE_CHECK_IMPLEMENTATION_PATH", "PACKAGE_TOOL_IMPLEMENTATION_PATH", "REVIEW_TOOL_IMPLEMENTATION_PATH", "PROJECT_CHECK_TEST_PATH", "SCOPE_CHECK_TEST_PATH", "PACKAGE_TOOL_TEST_PATH", "REVIEW_TOOL_TEST_PATH"],
+        "exclude": ["artifacts/events/**", "task_interactions/**/package/**"]
+      },
+      "mutation": {"mode": "task_authorized", "allowed_operations": ["add_file", "replace_text"], "forbidden_fields": ["credentials", "protected_content"], "requires_approval": true},
+      "interface": {"input_contract": "PROJECT_LEDGER_AND_EXPLICIT_PATH_INPUTS", "output_contract": "READ_ONLY_STRUCTURED_CHECK_RESULT"},
+      "validation": {"commands": ["PROJECT_CHECK_COMMAND", "SCOPE_CHECK_COMMAND", "FULL_TEST_COMMAND"], "required_checks": ["reference_drift", "scope_rejection", "round_package_tamper", "event_chain_tamper", "generated_view_drift"]},
+      "rollback": {"strategy": "restore_versioned_files"},
+      "dependencies": []
+    },
+    {
+      "component_id": "example_component",
+      "type": "application_component",
+      "owner": "PROJECT_TEAM",
+      "availability": "planned",
+      "risk_level": "medium",
+      "path_scope": {"include": ["src/package/**"], "exclude": ["src/package/secrets/**"]},
+      "mutation": {"mode": "task_authorized", "allowed_operations": ["add_file", "replace_text"], "forbidden_fields": ["credentials", "permissions", "production_endpoint"], "requires_approval": true},
+      "interface": {"input_contract": "INPUT_CONTRACT", "output_contract": "OUTPUT_CONTRACT"},
+      "validation": {"commands": ["TARGETED_TEST_COMMAND", "FULL_TEST_COMMAND"], "required_checks": ["contract_test", "regression"]},
+      "rollback": {"strategy": "restore_versioned_files"},
+      "dependencies": []
+    },
+    {
+      "component_id": "protected_evaluator",
+      "type": "evaluator",
+      "owner": "EVALUATION_TEAM",
+      "availability": "existing",
+      "risk_level": "critical",
+      "path_scope": {"include": [], "exclude": ["evaluation/**", "tests/holdout/**"]},
+      "mutation": {"mode": "forbidden", "allowed_operations": [], "forbidden_fields": ["*"], "requires_approval": true},
+      "interface": {"input_contract": null, "output_contract": null},
+      "validation": {"commands": [], "required_checks": []},
+      "rollback": {"strategy": "external_owner"},
+      "dependencies": []
+    }
+  ]
+}

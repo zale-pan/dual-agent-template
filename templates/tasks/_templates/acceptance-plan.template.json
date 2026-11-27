@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.1",
+  "template_only": true,
+  "status": "draft_example_not_authorized",
+  "task_id": "TASK_ID",
+  "round_id": "round-NNN",
+  "execution_rule": ".dual-agent/docs/ACCEPTANCE_EXECUTION_RULES.zh-CN.md",
+  "orchestration_rule": ".dual-agent/docs/STEWARD_ORCHESTRATION_RULES.zh-CN.md",
+  "workflow_entry": "Choose phase and a verified applicable entry from .dual-agent/docs/STEWARD_ORCHESTRATION_RULES.zh-CN.md section 9; plan/audit/summarize are not a mandatory sequence and do not publish automatically.",
+  "read_session": "Use the target project verified ReadSession capability; byte-read reuse does not prove semantic-result reuse or candidate/live path equivalence.",
+  "mode": "full_independent_collection",
+  "content_environment_fingerprints": "EXACT_HASHES_AND_ENVIRONMENT",
+  "authorized_write_paths": [],
+  "acceptance_assertion_mapping": [],
+  "ordered_commands": [
+    {
+      "group": "provenance_scope",
+      "command": "EXACT_COMMAND"
+    },
+    {
+      "group": "critical_and_independent_regression",
+      "command": "EXACT_COMMAND"
+    },
+    {
+      "group": "one_full_suite",
+      "command": "EXACT_FULL_COMMAND"
+    },
+    {
+      "group": "applicable_current_build_install",
+      "command": "EXACT_COMMAND"
+    }
+  ],
+  "continue_on_ordinary_product_failure": true,
+  "stop_exceptions": [
+    "safety_or_untrusted_provenance",
+    "impossible_dependency_for_affected_check"
+  ],
+  "full_suite_runs_per_code_fingerprint_review": 1,
+  "near_full_focused_duplicate": false,
+  "dedup_and_reuse_basis": "EXACT_ASSERTION_DEPENDENCY_ENVIRONMENT_BASIS",
+  "orchestration": {
+    "coverage": "Default full review;explicit user-approved affected-only coverage overrides it without automatic expansion or reduction.",
+    "inventory": "One attributable content inventory per stable baseline;reuse it across scope/history checks,with drift validation.",
+    "external_candidate": "Reuse one candidate per logical operation;no fresh whole-history copy for each state or failed step.",
+    "check_key": "Task/round,checker or probe SHA/version,exact argv/selector,input bytes/environment/artifact fingerprints,state/event head,and relevant path/inventory semantics.",
+    "dispatch_business_tests": "Not run by default;governance publication does not require implementation acceptance suites.",
+    "reuse_record": "Original independent evidence path/SHA,matching check key,coverage and invalidation basis;never implementation self-report as independent proof.",
+    "rerun_reason": "Required only for affected input/state/environment changes,invalid evidence or explicit mandatory gate;record exact reason.",
+    "resume": "Preserve failed candidate/output;resume earliest affected step and reuse unaffected valid evidence.",
+    "publication": "Finalize publication bytes,check one candidate,guard input stability,publish and read back actual paths/bytes/new bindings. Recheck affected assertions for declared release-time fields;no default second full history check.",
+    "publication_reuse_basis": "Bind the original independent result and coverage,input/object content stability,event prefix and candidate/live path semantics;prefix equality or metadata alone is insufficient.",
+    "full_check_fallback": "Before fallback record missing proof,inspected tool capabilities,why local verification is insufficient,exact command/coverage and cost or unknown;cite any explicit mandatory frozen gate. No invented incremental support.",
+    "costs": "Separate measured/estimated wall intervals,tool execution,Steward preparation/documentation,interactive idle and rework;record overlap and unknowns.",
+    "runner_reuse": "List reviewed runner path/version/SHA and task data first;do not regenerate whole flows by default. Historical scripts need external output-safe adaptations;unavailable is explicit,not invented automation.",
+    "count_preflight": "Derive implementation/test/doc,report,Steward-output and total-delta counts from actual path sets;do not hardcode implementation count as report-inclusive scope gate.",
+    "permission_preflight": "Normalize allowed/denied paths and require no intersection before expensive checks. Current authorized report positive;old and unauthorized future reports negative.",
+    "evidence_collection": "Persist raw results once immediately;canonical verdict/index/human view reference them. Retain necessary durable copies,unique assertions and failed attempts.",
+    "interactive_process": "Consecutive ready/health/real signal/native-child exit/resource checks;avoid documentation idle gaps. Separate PTY-shell exit and manual waiting from native execution."
+  },
+  "runner_inventory": [],
+  "timing_plan": {
+    "categories": ["main_regression", "independent_probes", "authoritative_checks", "inventory_candidate_publication_cleanup", "steward_adaptation_and_documentation", "interactive_idle", "audit_rework"],
+    "wall_clock": "Record actual start/end and elapsed;label measured versus estimated intervals.",
+    "overlap": "Record parallel overlap;sum of command durations is not total wall time.",
+    "unmeasured": "unknown/null;timestamp gaps do not prove exact thinking or execution time."
+  },
+  "cost_estimates": "MEASURED_OR_UNKNOWN",
+  "storage_validation": {
+    "rule": ".dual-agent/docs/STEWARD_STORAGE_VALIDATION.zh-CN.md",
+    "preimplementation_inventory": "EXACT_IMMUTABLE_INVENTORY_PATH_SHA_SCOPE_AND_CAPTURE_EVENT_HEAD",
+    "durable_audit_store": "PROJECT_CONFIGURED_ABSOLUTE_PATH_OUTSIDE_SYSTEM_TEMP",
+    "verified_copy_and_objects": "EXACT_INDEX_PATH_SHA_AND_RESTORE_VALIDATION_EVIDENCE",
+    "scratch_lifecycle": "OWNED_ABSOLUTE_PATHS_PURPOSE_REFERENCES_AND_CLEANUP_CONDITION",
+    "deletion_rule": "No sole required evidence copy in Temp;retain formal history and still-referenced baseline objects.",
+    "loss_handling": "Recover or mark precise proof unproven;continue safe independent checks with trusted inputs;no automatic waiver or current-bytes reconstruction of old baseline."
+  },
+  "result_vocabulary": [
+    "executed_pass",
+    "executed_fail",
+    "blocked_by_dependency_failure",
+    "not_run_due_to_safety_or_provenance",
+    "reused_with_basis",
+    "skipped_existing",
+    "withdrawn_audit_error",
+    "probe_error"
+  ],
+  "evidence_outputs": "STEWARD_EVIDENCE_PATHS;implementation exact report only",
+  "claim_boundary": "Template only,no actual task approval/dispatch/execution/evidence."
+}

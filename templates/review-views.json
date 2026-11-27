@@ -1,0 +1,33 @@
+{
+  "schema_version": "2.0.0",
+  "document_type": "review_view_mapping_template",
+  "default_human_entry": "docs/GOVERNANCE_REVIEW.zh-CN.md",
+  "views": [
+    {
+      "output": "docs/GOVERNANCE_REVIEW.zh-CN.md",
+      "sources": [
+        "PROJECT_GOALS.json",
+        "DEVELOPMENT_STATUS.json",
+        "COMPONENT_REGISTRY.json"
+      ],
+      "locale": "zh-CN"
+    },
+    {
+      "output": "TASK_CATALOG.md",
+      "sources": [
+        "DEVELOPMENT_STATUS.json"
+      ],
+      "locale": "zh-CN"
+    },
+    {
+      "output": "TRACEABILITY_MATRIX.md",
+      "sources": [
+        "PROJECT_GOALS.json",
+        "DEVELOPMENT_STATUS.json"
+      ],
+      "locale": "zh-CN"
+    }
+  ],
+  "renderer_command": "python -B .dual-agent/tools.py review_views --write",
+  "check_command": "python -B .dual-agent/tools.py review_views --check"
+}

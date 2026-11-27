@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "P0-T01",
+  "title": "Governance checks bootstrap",
+  "status": "draft",
+  "owner_role": "implementation_agent",
+  "runtime_assignment": "IMPLEMENTATION_RUNTIME",
+  "task_doc": "tasks/active/P0-T01.en.md",
+  "consultation_ref": "tasks/consultations/P0-T01.zh-CN.md",
+  "consultation_status": "awaiting_discussion",
+  "completion_report_path": "task_interactions/P0-T01/round-001/completion-report.yaml",
+  "round_manifest_path": "task_interactions/P0-T01/round-001/package/round-manifest.json",
+  "governed_input_paths": [
+    "IMPLEMENTATION_AGENT_PROMPT.en.md",
+    "AGENTS.md",
+    "COLLABORATION_POLICY.json",
+    "PROJECT_GOALS.json",
+    "DEVELOPMENT_STATUS.json",
+    "tasks/CURRENT_TASK.md",
+    "tasks/consultations/P0-T01.zh-CN.md",
+    "tasks/active/P0-T01.en.md",
+    "tasks/active/P0-T01.task.json",
+    "task_interactions/P0-T01/round-001/instruction.md",
+    "STATUS_TRANSITIONS.md",
+    "EVENT_LOG_PROTOCOL.md",
+    "ROUND_PROVENANCE.md",
+    "CONSULTATION_WITNESS_RULES.md",
+    "docs/STEWARD_STORAGE_VALIDATION.zh-CN.md",
+    "tasks/_templates/round-summary.template.md"
+  ],
+  "goal_refs": [
+    "G-GOV-001"
+  ],
+  "acceptance_refs": [
+    "G-GOV-001-AC01",
+    "G-GOV-001-AC02"
+  ],
+  "allowed_write_paths": [
+    "PROJECT_CHECK_IMPLEMENTATION_PATH",
+    "SCOPE_CHECK_IMPLEMENTATION_PATH",
+    "PACKAGE_TOOL_IMPLEMENTATION_PATH",
+    "REVIEW_TOOL_IMPLEMENTATION_PATH",
+    "STEWARD_WORKFLOW_IMPLEMENTATION_PATH",
+    "RETENTION_IMPLEMENTATION_PATH",
+    "RETENTION_TEST_PATH",
+    "PROJECT_CHECK_TEST_PATH",
+    "SCOPE_CHECK_TEST_PATH",
+    "PACKAGE_TOOL_TEST_PATH",
+    "REVIEW_TOOL_TEST_PATH",
+    "task_interactions/P0-T01/round-001/completion-report.yaml"
+  ],
+  "required_commands": [
+    "PROJECT_CHECK_POSITIVE_COMMAND",
+    "PROJECT_CHECK_NEGATIVE_COMMAND",
+    "SCOPE_CHECK_POSITIVE_COMMAND",
+    "SCOPE_CHECK_NEGATIVE_COMMAND",
+    "FULL_TEST_COMMAND",
+    "LINT_COMMAND",
+    "BUILD_COMMAND"
+  ],
+  "forbidden_expansions": [
+    "business feature implementation",
+    "editing task, ledger, handoff, review, or verification files",
+    "reading or modifying protected content merely to test path rejection"
+  ],
+  "round_id": "round-001",
+  "acceptance_matrix_refs": [
+    "CONSULTATION_WITNESS_RULES.md",
+    "tasks/active/P0-T01.en.md#req-06-round-identity-recovery-and-publication",
+    "tasks/active/P0-T01.en.md#req-07-evidence-retirement-and-normal-cleanup"
+  ]
+}

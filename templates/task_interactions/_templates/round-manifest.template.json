@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0.0",
+  "document_type": "round_package_manifest",
+  "task_id": "TASK_ID",
+  "round_id": "round-NNN",
+  "prepared_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "prepared_by_role": "task_steward",
+  "implementation_runtime": "IMPLEMENTATION_RUNTIME",
+  "hash_algorithm": "sha256",
+  "package_root": ".dual-agent/task_interactions/TASK_ID/round-NNN/package",
+  "agent_read_set": [
+    ".dual-agent/task_interactions/TASK_ID/round-NNN/package/inputs/.dual-agent/tasks/active/TASK_ID.en.md",
+    ".dual-agent/task_interactions/TASK_ID/round-NNN/package/inputs/.dual-agent/tasks/active/TASK_ID.task.json",
+    ".dual-agent/task_interactions/TASK_ID/round-NNN/package/inputs/.dual-agent/task_interactions/TASK_ID/round-NNN/instruction.md"
+  ],
+  "inputs": [
+    {"kind": "bootstrap_prompt", "source_path": ".dual-agent/IMPLEMENTATION_AGENT_PROMPT.en.md", "snapshot_path": ".dual-agent/task_interactions/TASK_ID/round-NNN/package/inputs/.dual-agent/IMPLEMENTATION_AGENT_PROMPT.en.md", "sha256": "SHA256_HEX", "bytes": 0},
+    {"kind": "round_instruction", "source_path": ".dual-agent/task_interactions/TASK_ID/round-NNN/instruction.md", "snapshot_path": ".dual-agent/task_interactions/TASK_ID/round-NNN/package/inputs/.dual-agent/task_interactions/TASK_ID/round-NNN/instruction.md", "sha256": "SHA256_HEX", "bytes": 0}
+  ],
+  "required_commands": ["EXACT_COMMAND"],
+  "completion_report_path": ".dual-agent/task_interactions/TASK_ID/round-NNN/completion-report.yaml"
+}

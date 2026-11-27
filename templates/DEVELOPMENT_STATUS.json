@@ -1,0 +1,45 @@
+{
+  "schema_version": "0.1.0",
+  "document_type": "development_status",
+  "project": "PROJECT_NAME",
+  "current_phase": null,
+  "project_startup": {
+    "status": "pending",
+    "decision_basis": "",
+    "required_automated_checks": [],
+    "blockers": []
+  },
+  "overall_status": "planning",
+  "governance_event_log": {
+    "path": ".dual-agent/artifacts/events/governance-events.jsonl",
+    "status": "unused",
+    "reason": "Only initialize when explicitly required by an approved contract."
+  },
+  "human_review_views": [
+    ".dual-agent/docs/GOVERNANCE_REVIEW.zh-CN.md",
+    ".dual-agent/TASK_CATALOG.md",
+    ".dual-agent/TRACEABILITY_MATRIX.md"
+  ],
+  "status_vocabulary": [
+    "draft",
+    "ready_for_review",
+    "approved",
+    "implementation_in_progress",
+    "implementation_submitted",
+    "verification_failed",
+    "verified"
+  ],
+  "phases": [],
+  "next_actions": [],
+  "handoff_notes": [
+    "No active grant. Set the current task only after approval and actual dispatch."
+  ],
+  "consultation_vocabulary": [
+    "not_started",
+    "awaiting_discussion",
+    "awaiting_decision",
+    "ready_for_review",
+    "agreed",
+    "rejected"
+  ]
+}
