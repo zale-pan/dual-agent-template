@@ -2,7 +2,19 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A user approves the scope, a Task Steward dispatches work and independently verifies it, and an Implementation Agent makes the approved changes.
+![A Steward prepares the task, the user approves it, an Implementation Agent makes changes, and the Steward independently verifies the result.](assets/dual-agent-workflow.png)
+
+**A reusable workflow for developing software with two AI agents, clear permissions, and independent verification.**
+
+AI agents can make changes quickly. Across several rounds, keeping track of what was approved, what actually changed, and what the tests established takes deliberate work. This template gives that work a consistent place in the development process.
+
+The **Task Steward** turns a goal into a reviewable task, defines the allowed changes, and independently checks the delivered result. The **Implementation Agent** works within the approved scope and submits its changes and test results. **You** approve the scope and decide when the work should expand.
+
+Start with two role prompts and one round worksheet. For projects that need more structure, the optional Python tools prepare drafts, freeze inputs, check file identities, record decisions, and help reuse valid acceptance evidence. The workflow runs through your existing agent tools and conversations, with each round ending in a concise summary.
+
+For example, a bug-fix round can authorize changes to one function and its tests, define the expected behavior, and specify the checks to run. After implementation, the Steward reviews the actual diff and independently runs those checks. A remaining defect becomes a concrete finding for review before another correction round.
+
+This project grew out of the multi-round development of ForeContract. It brings together the practices that helped keep scope, evidence and temporary data manageable. Contributions are welcome, especially reports of confusing steps, reproducible tool failures, and examples from other projects.
 
 ## Getting started
 
