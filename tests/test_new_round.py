@@ -85,3 +85,21 @@ def test_linked_task_directory_cannot_redirect_draft(project):
         link.symlink_to(outside, target_is_directory=True)
     assert call(project, "APP", "round-001").returncode != 0
     assert list(outside.iterdir()) == []
+
+
+@pytest.mark.parametrize("encoding", ["cp1252", "ascii"])
+def test_installed_cli_outputs_utf8_with_legacy_stream_encoding(project, encoding):
+    root = project.with_name("项目")
+    project.rename(root)
+    env = dict(os.environ, PYTHONIOENCODING=encoding, PYTHONUTF8="0")
+    args = [sys.executable, "-B", str(root / ".dual-agent/tools.py"),
+            "new-round", "APP", "round-001"]
+    result = subprocess.run(args, capture_output=True, env=env, stdin=subprocess.DEVNULL)
+    assert result.returncode == 0, result.stderr
+    assert "轮次工作单.md" in result.stdout.decode("utf-8")
+    before = snapshot(root)
+    repeated = subprocess.run(args, capture_output=True, env=env, stdin=subprocess.DEVNULL)
+    assert repeated.returncode == 1
+    assert "preserved: .dual-agent/task_interactions/APP/round-001" in repeated.stderr.decode("utf-8")
+    assert b"Traceback" not in repeated.stderr
+    assert snapshot(root) == before

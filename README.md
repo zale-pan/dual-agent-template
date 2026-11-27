@@ -111,14 +111,14 @@ Developed from the dual-agent workflow used in ForeContract. Copyright 2026 Zale
 
 ## Platform support and macOS CI
 
-Windows and Ubuntu have been tested locally. macOS is included in the GitHub Actions matrix with Python 3.10, 3.11 and 3.13; its first remote run is pending. Every matrix job runs the complete root and governance suites and reports skip reasons. Failures fail the job. The workflow can also be started manually after upload.
+Windows and Ubuntu have been tested locally. macOS is included in the GitHub Actions matrix with Python 3.10, 3.11 and 3.13; the first remote run passed all three macOS combinations. Every matrix job runs the complete root and governance suites and reports skip reasons. Failures fail the job. The workflow can also be started manually after upload.
 
 Manual worksheets and prompts can be used on macOS. The Python workflow runner now selects a macOS kqueue vnode witness for directories and regular files. Read-session caching observes those notifications, and final inventory reads are independent of the admission cache. A registration or event-read failure prevents acceptance eligibility. Notifications for directories are retained conservatively even if they may concern an excluded child.
 
-Portable API-double tests cover notification handling, cache invalidation with identical signatures, clean and changed inventories, monitoring failures and descriptor cleanup. These tests validate integration logic; real macOS behavior remains pending CI.
+Portable API-double tests cover notification handling, cache invalidation with identical signatures, clean and changed inventories, monitoring failures and descriptor cleanup. These tests validate integration logic; native restored-write, directory-change and clean-audit controls passed on the first macOS CI run.
 
 The macOS CI must verify the existing clean-and-restored-write control, the new native vnode test (restored bytes and mtime, transient directory changes), symlink rejection, and subprocess/port cleanup. Large trees may exhaust file descriptors because each watched file and directory holds one descriptor; registration failure rejects eligibility. Establish supported filesystem and project-size limits from real macOS results before claiming broader support. Network filesystem behavior remains unverified.
 
 Three expected platform skips on macOS are Windows open-handle deletion semantics, Windows command syntax, and the Linux notification queue test. Symlink tests should normally run. Review any additional skips individually. The clean-workspace and restored-write controls have no platform skip.
 
-The CI matrix expands platform coverage; macOS support remains unverified until the relevant controls pass on a real macOS runner.
+The first CI run passed all macOS and Ubuntu combinations. Windows exposed a legacy console-encoding failure in new-round. The CLI now emits UTF-8, with CP1252 and ASCII regression cases; the follow-up CI checks this correction.
