@@ -16,6 +16,77 @@ For example, a bug-fix round can authorize changes to one function and its tests
 
 This project grew out of the multi-round development of ForeContract. It brings together the practices that helped keep scope, evidence and temporary data manageable. Contributions are welcome, especially reports of confusing steps, reproducible tool failures, and examples from other projects.
 
+## Ask your agent to set it up
+
+Give an agent the template location and target project path. It can inspect the project, initialize the selected workflow and prepare the first worksheet. Use two conversations for the Steward and implementer; both can use the same model. The supplied tools generate and check files. You or your existing agent host handles delivery between conversations.
+
+Send this prompt to the Steward, replacing the placeholders:
+
+```text
+Act as Task Steward and help me adopt the dual-agent template.
+
+Template directory: <absolute template path>
+Target project: <absolute project path>
+Project name: <name>
+Goal: <feature or fix>
+Mode: <manual worksheet / structured Python tools>
+Implementation Agent: <name or conversation identity>
+
+Read the template README and TASK_STEWARD_BOOTSTRAP_PROMPT.en.md.
+Inspect the target's existing instructions, source, test entry points
+and uncommitted changes.
+Initialize the selected mode. If existing files conflict, show the
+specific differences for my approval before merging.
+Complete lightweight P0, exercising the automatic controls required
+by the first round with positive and negative cases.
+Prepare one first-round worksheet with the goal, allowed files,
+acceptance assertions, complete test commands and output locations.
+Submit it for my approval before dispatch.
+```
+
+After approval and delivery, send the following to the implementer:
+
+```text
+Act as Implementation Agent.
+Project directory: <absolute project path>
+Your assigned identity: <approved agent name>
+Round worksheet or dispatch entry: <actual absolute delivery path>
+
+Read IMPLEMENTATION_AGENT_BOOTSTRAP_PROMPT.en.md in
+<absolute template path>, the project's instructions and this round's contract.
+Verify task, round, P0, approval, assigned identity, actual dispatch
+and input versions.
+Implement the approved paths and operations, run the agreed checks,
+and return actual changes, test results and unexecuted checks
+for independent Steward verification.
+Report missing authorization or conflicting scope before proceeding.
+```
+
+Return to the Steward conversation for acceptance against the round contract. After acceptance, close the round's permissions and keep a concise summary. If corrections are needed, review and approve the next scope before implementation.
+
+## Clone once, reuse across projects
+
+Keep the template checkout alongside your business projects. For example, initialize two structured projects on Windows:
+
+```powershell
+git clone https://github.com/zale-pan/dual-agent-template.git "D:/Projects/dual-agent-template"
+python -B "D:/Projects/dual-agent-template/init_project.py" "D:/Projects/MyApp" --name "MyApp"
+python -B "D:/Projects/dual-agent-template/init_project.py" "D:/Projects/MyService" --name "MyService"
+```
+
+On macOS or Linux:
+
+```sh
+git clone https://github.com/zale-pan/dual-agent-template.git "$HOME/Projects/dual-agent-template"
+python3 -B "$HOME/Projects/dual-agent-template/init_project.py" "$HOME/Projects/MyApp" --name "MyApp"
+```
+
+Each target receives its own AGENTS.md and .dual-agent/ and maintains its own tasks, approvals, acceptance records and summaries. Initialization copies the tools and templates; projects execute their local copies. Complete P0 separately for every new project. Reuse template content while binding authorization and evidence to the actual project. Business code can use any language; Python runs the optional template tools.
+
+For an existing business repository, use its root as the target. First review its AGENTS.md, uncommitted changes and active rounds. Conflicting file contents stop initialization so the Steward can prepare a merge for review. Keep template and target directories separate; sibling directories work. For manual use, copy the English worksheet and role prompts linked below. The initializer's --manual option copies the Chinese equivalents.
+
+To update later, run `git pull --ff-only` in the template checkout. Preview and apply upgrades separately for each target project, using that project's own preview digest. Follow “Upgrading a structured project” below. Preserve project-specific configuration, approvals and round records, and review local tool edits before replacement.
+
 ## Getting started
 
 For small changes, use the [round worksheet](templates/docs/lifecycle/round-worksheet.en.md) and give each agent its role prompt: [Task Steward](TASK_STEWARD_BOOTSTRAP_PROMPT.en.md) and [Implementation Agent](IMPLEMENTATION_AGENT_BOOTSTRAP_PROMPT.en.md). Fill in the goal, allowed files, acceptance commands and approval. Expand the startup section for the first round and the evidence section when needed.

@@ -16,6 +16,71 @@ AI Agent 改代码很快。随着修正轮次增多，哪些修改获得了批�
 
 这份模板来自 ForeContract 多轮开发中的实践，整理了控制修改范围、核对验收证据和管理临时数据的方法。欢迎提交难以理解的流程、可复现的工具问题，以及在其他项目中的使用经验。
 
+## 让你的 Agent 帮你接入
+
+你可以把模板路径和目标项目路径交给 Agent，让它检查现有项目、完成初始化并准备首轮工作单。建议开两个对话，分别指定 Steward 和实施者；两个角色可以使用同一种模型。当前工具负责生成和检查文件，两个对话之间的交付由你或现有宿主完成。
+
+把下面这段发给负责统筹的 Agent，替换尖括号中的内容：
+
+```text
+请担任 Task Steward，帮我把双代理模板接入项目。
+
+模板目录：<模板的绝对路径>
+目标项目：<项目的绝对路径>
+项目名称：<项目名>
+目标：<我想完成的功能或修复>
+使用方式：<手工工作单 / Python 结构化工具>
+实施 Agent：<名称或对话身份>
+
+先读取模板 README 和 TASK_STEWARD_BOOTSTRAP_PROMPT.zh-CN.md，
+核对目标项目已有规则、源码、测试入口和未提交改动。
+按选定方式初始化；已有同名文件若有冲突，列出具体差异供我确认合并。
+完成轻量 P0，实测首轮依赖的自动检查及正反例。
+然后准备一份首轮工作单，写清目标、允许修改的文件、验收断言、
+完整测试命令和输出位置，交给我批准后再下发。
+```
+
+首轮批准并下发后，把下面这段发给另一个 Agent：
+
+```text
+请担任 Implementation Agent。
+项目目录：<项目的绝对路径>
+你的实施身份：<已指定的 Agent 名称>
+本轮工作单或下发入口：<实际交付的绝对路径>
+
+读取模板的 IMPLEMENTATION_AGENT_BOOTSTRAP_PROMPT.zh-CN.md
+（模板路径：<模板的绝对路径>），以及项目已有规则和本轮合同。
+核对任务、轮次、P0、批准、实施身份、实际下发和输入版本。
+按获批路径和操作实施，运行约定的测试，
+提交实际差异、测试结果和未执行项，交由 Steward 独立验收。
+遇到缺失授权或范围冲突时，先报告具体问题。
+```
+
+完成后回到 Steward 对话，要求它按本轮合同验收。验收通过后关闭本轮权限，保留简短总结；需要修正时，先准备下一轮范围供你批准。
+
+## 克隆一次，在多个项目复用
+
+在 Windows 上，可以把模板与业务项目放在同级目录。下面是结构化初始化示例，命令中的目录和项目名按实际情况替换：
+
+```powershell
+git clone https://github.com/zale-pan/dual-agent-template.git "D:/Projects/dual-agent-template"
+python -B "D:/Projects/dual-agent-template/init_project.py" "D:/Projects/MyApp" --name "MyApp"
+python -B "D:/Projects/dual-agent-template/init_project.py" "D:/Projects/MyService" --name "MyService"
+```
+
+macOS / Linux 可采用同样的布局：
+
+```sh
+git clone https://github.com/zale-pan/dual-agent-template.git "$HOME/Projects/dual-agent-template"
+python3 -B "$HOME/Projects/dual-agent-template/init_project.py" "$HOME/Projects/MyApp" --name "MyApp"
+```
+
+每个目标项目各自得到 AGENTS.md 和 .dual-agent/，各自维护任务、批准、验收及总结。初始化会复制工具和模板，目标项目运行时使用自己的副本。每个新项目分别完成 P0；可以复用模板内容，授权和验收结论需要绑定到当前项目。项目可以使用任意业务语言，Python 只负责模板工具。
+
+已有业务仓库也把它的根目录作为目标。先检查已有 AGENTS.md、工作区改动和正在进行的轮次；同路径不同内容会停止初始化，交给 Steward 准备合并方案。模板目录与目标项目应互相独立，放成同级目录即可。轻量手工项目可在初始化命令末尾加 --manual，或直接复制工作单与角色提示词。
+
+以后更新模板，在模板目录执行 `git pull --ff-only`，再对需要升级的目标项目逐一预览、核对并应用。每个项目使用各自预览返回的摘要，具体命令见下方“升级已有结构化项目”。保留项目自己的配置、批准和轮次记录，并核对工具本地修改的去留。
+
 ## 从哪里开始
 
 **手工使用**适合短脚本、小型改动和有人逐轮审批的原型。给两个 Agent 各一份中文启动提示词，用一份工作单完成轻量 P0、范围批准、独立验收和关权限。首轮无需读取完整 JSON 或存储手册；出现共享引用、真实清理或恢复时，Steward 再查相应章节。下方命令可代为复制这三个文件，也可手工复制。
