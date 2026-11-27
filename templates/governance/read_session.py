@@ -38,8 +38,8 @@ FILE_ATTRIBUTE_REPARSE_POINT = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x4
 def _nt_change_time_ns(path: Path) -> int | None:
     """Return the NTFS ChangeTime (100ns units since 1601) via FileBasicInfo.
 
-    ChangeTime advances on any content or metadata write (including ``os.utime``),
-    so a same-size in-place rewrite whose mtime/atime are restored still changes it.
+    ChangeTime is a metadata signal, not a unique revision counter.
+    Multiple writes can share a timestamp; cached Windows bytes are revalidated.
     """
     if os.name != "nt":
         return None
@@ -260,7 +260,8 @@ class ReadSession:
             except OSError:
                 signature = None
         cached = self._bytes.get(key)
-        if cached is not None and signature is not None and cached[0] == signature:
+        if (os.name != "nt" and cached is not None
+                and signature is not None and cached[0] == signature):
             self.counters["dedup_hits"] += 1
             return cached[1]
         try:
@@ -269,6 +270,8 @@ class ReadSession:
             raise SessionError(f"unreadable input: {key}: {exc}") from exc
         self.counters["read_bytes"] += 1
         self.counters["bytes"] += len(raw)
+        if cached is not None and cached[1] == raw:
+            self.counters["dedup_hits"] += 1
         self._bytes[key] = (signature, raw)
         return raw
 

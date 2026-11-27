@@ -53,7 +53,7 @@ def test_read_bytes_dedups_when_unchanged(work: Path) -> None:
     a = session.read_bytes("x.json")
     b = session.read_bytes("x.json")
     assert a == b == b'{"n":1}'
-    assert session.counters["read_bytes"] == 1
+    assert session.counters["read_bytes"] == (2 if os.name == "nt" else 1)
     assert session.counters["dedup_hits"] == 1
 
 
@@ -85,7 +85,7 @@ def test_read_json_parse_skips(work: Path) -> None:
     a = session.read_json("a.json")
     b = session.read_json("a.json")
     assert a == b == {"x": 1}
-    assert session.counters["read_bytes"] == 1
+    assert session.counters["read_bytes"] == (2 if os.name == "nt" else 1)
 
 
 def test_read_json_strict_duplicate_key(work: Path) -> None:
@@ -157,3 +157,14 @@ def test_rel_reason_rejects_bad_paths() -> None:
     assert _rel_reason("../x") is not None
     assert _rel_reason("") is not None
     assert _rel_reason(None) is not None
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows byte revalidation")
+def test_windows_equal_signatures_do_not_reuse_stale_bytes(work, monkeypatch):
+    put(work, "x.json", b'{"n":1}')
+    session = ReadSession(work)
+    monkeypatch.setattr(session, "_signature", lambda path: (1, 7, 0, 0))
+    assert session.read_json("x.json") == {"n": 1}
+    put(work, "x.json", b'{"n":2}')
+    assert session.read_json("x.json") == {"n": 2}
+    assert session.counters["read_bytes"] == 2

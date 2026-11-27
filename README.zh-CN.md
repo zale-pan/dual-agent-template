@@ -115,3 +115,6 @@ macOS CI 需核对既有干净运行和写后恢复控制、新增原生 vnode �
 macOS 预期跳过三项平台专用测试，分别是 Windows 打开句柄时的删除语义、Windows 命令语法和 Linux 通知队列。符号链接测试通常应执行，其他额外跳过逐项核对。“干净运行及写后恢复”控制没有平台跳过。
 
 首次 CI 的 macOS 和 Ubuntu 组合全部通过。Windows 暴露了 new-round 在旧控制台编码下输出中文路径失败的问题。CLI 已统一输出 UTF-8，并增加 CP1252 和 ASCII 回归用例，后续 CI 复核该修正。
+
+
+后续 Windows CI 还发现同长度写入并恢复 mtime 后错误复用旧字节的问题。Windows 现改为复用前重新读取文件字节，会增加实际读取次数，内容不变时仍复用 JSON 解析结果。新增固定签名回归覆盖该失败，Linux 和 macOS 会额外跳过此 Windows 专用控制。

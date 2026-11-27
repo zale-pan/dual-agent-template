@@ -122,3 +122,6 @@ The macOS CI must verify the existing clean-and-restored-write control, the new 
 Three expected platform skips on macOS are Windows open-handle deletion semantics, Windows command syntax, and the Linux notification queue test. Symlink tests should normally run. Review any additional skips individually. The clean-workspace and restored-write controls have no platform skip.
 
 The first CI run passed all macOS and Ubuntu combinations. Windows exposed a legacy console-encoding failure in new-round. The CLI now emits UTF-8, with CP1252 and ASCII regression cases; the follow-up CI checks this correction.
+
+
+A subsequent Windows CI run also detected stale cached bytes after a same-size write with restored mtime. Windows reads now revalidate file bytes before reusing cached results. This increases physical reads while retaining JSON parse reuse for unchanged content. A fixed-signature regression covers the failure. On Linux and macOS this Windows-specific regression is an additional expected skip.
